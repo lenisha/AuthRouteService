@@ -2,7 +2,7 @@
 
 # Cloud Foundry Route Service Example in .NET
 
-This project is an example of a [Cloud Foundry Route Service][r] written with .NET[b].  This application does the following to each request:
+This project is an example of a [Cloud Foundry Route Service][r] written with .NET.  This application does the following to each request:
 
 1. Intercepts an incoming request
 2. Logs information about that incoming request
