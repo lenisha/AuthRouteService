@@ -1,0 +1,7 @@
+﻿---
+applications:
+- name: sm-route
+  memory: 1G
+  health-check-type: none
+  buildpack: hwc_buildpack
+  stack: windows2012R2

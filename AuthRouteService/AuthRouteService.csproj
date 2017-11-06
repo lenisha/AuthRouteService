@@ -101,6 +101,7 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="manifest.yml" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
