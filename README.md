@@ -50,4 +50,4 @@ The project is released under version 2.0 of the [Apache License][a].
 [c]: https://console.run.pivotal.io/register
 [i]: http://docs.run.pivotal.io/devguide/installcf/install-go-cli.html
 [r]: http://docs.cloudfoundry.org/services/route-services.html
-[y]: manifest.yml
+[y]: AuthRouteService/manifest.yml
