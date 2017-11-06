@@ -27,15 +27,14 @@ namespace AuthRouteService
 
 		private async Task<HttpResponseMessage> RedirectRequest(HttpRequestMessage request, CancellationToken cancellationToken)
 		{
-			logger.Info("Incoming Request {0} ", request);
+			logger.Debug("Incoming Request {0} ", request);
 
 			String remoteserver = request.GetFirstHeaderValueOrDefault<String>(FORWARDED_URL);
 
 			if (remoteserver == null)
 				return await ErrorPage(request);
 
-			//var localPath = request.RequestUri.LocalPath;
-
+		
 			ServicePointManager.ServerCertificateValidationCallback += (mender, certificate, chain, sslPolicyErrors) => true;
 
 			var client = new HttpClient(new HttpClientHandler {
@@ -48,12 +47,12 @@ namespace AuthRouteService
 			var remoteUri = new Uri(remoteserver);
 
 			var clonedRequest = await HttpRequestMessageExtensions.CloneHttpRequestMessageAsync(request, remoteUri);
-			logger.Info("Forwarding to  {0} ", clonedRequest);
+			logger.Debug("Forwarding to  {0} ", clonedRequest);
 
 			var httpResponseMessage = await client.SendAsync(clonedRequest, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
 
 
-			logger.Info("RESPONSE {0} ", httpResponseMessage);
+			logger.Debug("Outgoing Response {0} ", httpResponseMessage);
 
 			return httpResponseMessage;
 		}
