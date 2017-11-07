@@ -11,6 +11,7 @@ namespace AuthRouteService
     {
         protected void Application_Start()
         {
+			GlobalConfiguration.Configure(WebApiConfig.Register);
         }
 
 		void Application_Error(object sender, EventArgs e)
