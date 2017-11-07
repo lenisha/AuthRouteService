@@ -1,0 +1,7 @@
+﻿---
+applications:
+- name: testrouteapp
+  memory: 1G
+  health-check-type: http
+  buildpack: hwc_buildpack
+  stack: windows2012R2
