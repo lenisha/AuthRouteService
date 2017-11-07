@@ -11,7 +11,6 @@ namespace AuthRouteService
     {
         protected void Application_Start()
         {
-            GlobalConfiguration.Configure(WebApiConfig.Register);
         }
 
 		void Application_Error(object sender, EventArgs e)
@@ -20,11 +19,6 @@ namespace AuthRouteService
 			Console.WriteLine("Unhandled exception: " + lastError.Message + lastError.StackTrace);
 		}
 
-		protected void Application_BeginRequest(object sender, EventArgs e)
-		{
-		}
-		protected void Application_MapRequestHandler(object sender, EventArgs e)
-		{
-		}
+		
 	}
 }

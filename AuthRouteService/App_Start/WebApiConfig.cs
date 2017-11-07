@@ -23,7 +23,7 @@ namespace AuthRouteService
 
             ); */
 
-			config.MessageHandlers.Add(new ProxyHandler());
+			//config.MessageHandlers.Add(new ProxyHandler());
 
 			RouteTable.Routes.RouteExistingFiles = true;
 			RouteTable.Routes.MapHttpRoute("all", "{*path}");

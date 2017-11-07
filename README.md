@@ -51,3 +51,4 @@ The project is released under version 2.0 of the [Apache License][a].
 [i]: http://docs.run.pivotal.io/devguide/installcf/install-go-cli.html
 [r]: http://docs.cloudfoundry.org/services/route-services.html
 [y]: AuthRouteService/manifest.yml
+[h]: https://blog.kloud.com.au/2013/11/24/do-it-yourself-web-api-proxy/
