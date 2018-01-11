@@ -11,24 +11,33 @@ namespace AuthRouteService
         public static void Register(HttpConfiguration config)
         {
 			// Web API configuration and services
+			config.Formatters.Remove(config.Formatters.XmlFormatter);
+			// Global Handlers
+			config.MessageHandlers.Add(new HttpRequestLoggerHandler());
 
-			// Web API routes
-			//config.MapHttpAttributeRoutes();
+			// Web Api routes
+			config.MapHttpAttributeRoutes();
 
-			/*
+			// Route Service healthcheck controllers
 			config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
+                routeTemplate: "me/{controller}/{action}",
                 defaults: new { id = RouteParameter.Optional }
 
-            ); */
+            );
 
-			config.MessageHandlers.Add(new ProxyHandler());
+			// Intercepting backend calls
+			config.Routes.MapHttpRoute(
+				name: "allpath",
+				routeTemplate: "{*allpath}",
+				defaults: null,
+				constraints: null,
+				handler: new ProxyHandler()
+			);
 
+			// Route Static files (js,css) requests too
 			RouteTable.Routes.RouteExistingFiles = true;
-			RouteTable.Routes.MapHttpRoute("all", "{*path}");
 			
-			config.Routes.MapHttpRoute("allpath", "{*allpath}");
 		}
     }
 }

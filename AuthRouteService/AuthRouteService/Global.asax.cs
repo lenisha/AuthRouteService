@@ -18,6 +18,10 @@ namespace AuthRouteService
 		{
 			Exception lastError = Server.GetLastError();
 			Console.WriteLine("Unhandled exception: " + lastError.Message + lastError.StackTrace);
+			Response.ClearContent();
+			Response.Output.WriteLine("Unhandled exception: " + lastError.Message + lastError.StackTrace);
+			Response.StatusCode = 403;
+			Response.End();
 		}
 
 		protected void Application_BeginRequest(object sender, EventArgs e)
