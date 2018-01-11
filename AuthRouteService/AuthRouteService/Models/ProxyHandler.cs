@@ -7,6 +7,7 @@ using System.Threading;
 using System.Web;
 using NLog;
 using System.Net;
+using System.Text;
 
 namespace AuthRouteService
 {
@@ -36,6 +37,9 @@ namespace AuthRouteService
 
 		
 			ServicePointManager.ServerCertificateValidationCallback += (mender, certificate, chain, sslPolicyErrors) => true;
+			// required only in .NET 4.5
+			ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+
 
 			var client = new HttpClient(new HttpClientHandler {
 								AllowAutoRedirect = false,
@@ -57,12 +61,19 @@ namespace AuthRouteService
 			return httpResponseMessage;
 		}
 
-		private  Task<HttpResponseMessage> ErrorPage(HttpRequestMessage request)
+	
+
+		private Task<HttpResponseMessage> ErrorPage(HttpRequestMessage request, Exception ex = null)
 		{
+			StringBuilder stringBuilder = new StringBuilder("Route service does not get required constraints\n");
+			if (ex != null)
+				stringBuilder.Append(ex.ToString());
+
 			// Create the response.
-			var response = new HttpResponseMessage(HttpStatusCode.ExpectationFailed)
+			var response = new HttpResponseMessage(HttpStatusCode.BadRequest)
 			{
-				Content = new StringContent("Route service does not get required constraints")
+				Content = new StringContent(stringBuilder.ToString())
+
 			};
 
 			// Note: TaskCompletionSource creates a task that does not contain a delegate.
